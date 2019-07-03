@@ -6,10 +6,11 @@
                      alt="Province of British Columbia Logo"
                      title="Province of British Columbia"/>
             </a>
-
+            <div class="app-header__actions">
             <span v-if="authorized"><button class="v-btn" @click="logout">Sign Out</button> </span>
             <!-- temporary have "sign in" button which also trigger logout for unit test before figure out session mock for test case. Can be removed later.-->
             <span v-else><button class="v-btn" @click="logout">Sign In</button> </span>
+            </div>
         </div>
     </header>
 </template>
@@ -61,6 +62,8 @@ export default Vue.extend({
         background-color $BCgovBlue5
 
         .container
+            display flex
+            align-items center
             padding-top 0
             padding-bottom 0
 
