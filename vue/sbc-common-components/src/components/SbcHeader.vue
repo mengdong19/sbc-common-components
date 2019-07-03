@@ -6,15 +6,47 @@
                      alt="Province of British Columbia Logo"
                      title="Province of British Columbia"/>
             </a>
+
+            <span v-if="authorized"><button class="v-btn" @click="logout">Sign Out</button> </span>
+            <!-- temporary have "sign in" button which also trigger logout for unit test before figure out session mock for test case. Can be removed later.-->
+            <span v-else><button class="v-btn" @click="logout">Sign In</button> </span>
         </div>
     </header>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+import AuthService from '../services/auth.services'
 
 export default Vue.extend({
-  name: 'sbc-header'
+  name: 'sbc-header',
+  computed: {
+    authorized ():boolean {
+      let auth = sessionStorage.getItem('KEYCLOAK_TOKEN')
+      if (auth) {
+        return true
+      } else {
+        return false
+      }
+    }
+  },
+  methods: {
+    logout () {
+      AuthService.logout(sessionStorage.getItem('KEYCLOAK_REFRESH_TOKEN')).then(response => {
+        if (response.status === 204) {
+          console.log('response' + response)
+          sessionStorage.removeItem('KEYCLOAK_REFRESH_TOKEN')
+          sessionStorage.removeItem('KEYCLOAK_TOKEN')
+          sessionStorage.removeItem('REGISTRIES_TRACE_ID')
+          window.location.assign('/')
+        } else {
+          console.log('Logout failed. ' + response)
+        }
+      }).catch((error: any) => {
+        console.log('fetchError' + error)
+      })
+    }
+  }
 })
 </script>
 
@@ -31,6 +63,12 @@ export default Vue.extend({
         .container
             padding-top 0
             padding-bottom 0
+
+    .app-header__actions
+       margin-left auto
+
+      .v-btn
+        margin-right 0
 
     .brand-img
         margin-top 0.3rem
