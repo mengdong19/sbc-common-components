@@ -1,5 +1,5 @@
 import Axios from 'axios'
-const API_URL = 'http://localhost:5000/api/v1/'
+const API_URL = 'https://auth-api-dev.pathfinder.gov.bc.ca/api/v1/'
 const AUTHENTICATION_RESOURCE_NAME = 'logout'
 
 export default {
