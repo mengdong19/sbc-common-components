@@ -1,5 +1,5 @@
 <template>
-  <v-app class="app-container">
+  <div>
     <sbc-header></sbc-header>
     <div class="app-body">
       <div class="app-body__inner">
@@ -11,7 +11,7 @@
       </div>
     </div>
     <sbc-footer></sbc-footer>
-  </v-app>
+  </div>
 </template>
 
 <script lang="ts">
