@@ -24,11 +24,8 @@ export default Vue.extend({
   computed: {
     authorized ():boolean {
       let auth = sessionStorage.getItem('KEYCLOAK_TOKEN')
-      if (auth) {
-        return true
-      } else {
-        return false
-      }
+      debugger
+      return !!auth
     }
   },
   methods: {
