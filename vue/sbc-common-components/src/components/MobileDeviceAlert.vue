@@ -40,7 +40,7 @@ export default class MobileDeviceAlert extends Vue {
   }
 
   private async mounted () {
-    this.mobileDevice = true
+    this.mobileDevice = this.isMobileDevice()
   }
 }
 </script>
