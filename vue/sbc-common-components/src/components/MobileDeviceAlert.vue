@@ -6,8 +6,8 @@
       </v-card-title>
       <v-divider vertical></v-divider>
       <v-card-title class="justify-center text-center">
-        <div>Mobile Device Use is </div>
-        <div>not Recommended</div>
+        <div>Mobile Device Use is <br/>
+        not Recommended</div>
       </v-card-title>
       <v-card-text class="text-center">
         <p>
@@ -19,7 +19,7 @@
         </p>
       </v-card-text>
       <v-card-actions class="justify-center">
-        <v-btn text id="alert-ok-btn" @click="mobileDevice = false">OK</v-btn>
+        <v-btn text class="mobile-alert-ok-btn" @click="mobileDevice = false">OK</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -30,29 +30,26 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 
 @Component({})
 export default class MobileDeviceAlert extends Vue {
-  @Prop({ default: true })
-  mobileDevice: boolean
-
+  private mobileDevice: boolean = false
   private isMobileDevice (): boolean {
-    let mobile: boolean = false
-
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-      mobile = true
+      return true
     }
 
-    return mobile
+    return false
   }
 
   private async mounted () {
-    this.mobileDevice = this.isMobileDevice()
+    this.mobileDevice = true
   }
 }
 </script>
 
 <style lang="scss" scoped>
-#alert-ok-btn {
+.mobile-alert-ok-btn {
   background-color: #1669bb !important;
   width: 6.375rem;
   margin-bottom: 20px;
+  color: #fff !important;
 }
 </style>
